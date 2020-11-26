@@ -77,7 +77,7 @@ function chillHop() {
         "https://chillhop.com/wp-content/uploads/2020/07/858b533ba20ff95bf5b401089b195d1a8cb43870-1024x1024.jpg",
       artist: "Blue Wednesday, Felty",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=9334",
-      color: ["#E67747", "#865444"],
+      color: ["#E7D974", "#1872B1"],
       id: uuidv4(),
       active: false,
     },

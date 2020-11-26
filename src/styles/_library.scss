@@ -1,5 +1,4 @@
 .library {
-    position:fixed;
     position: fixed;
     top: 0;
     left: 0;
@@ -27,7 +26,7 @@
     align-items: center;
     padding: 1rem 2rem ;
     cursor: pointer;
-
+    transition: background .5s ease;
 
     &:hover {
         background-color: rgb(249, 235, 255);
@@ -71,4 +70,11 @@
 
 .selected {
     background-color: rgb(236, 202, 250);
+}
+
+
+@media screen and (max-width:768px) {
+    .library {
+        width: 100%;
+    }
 }

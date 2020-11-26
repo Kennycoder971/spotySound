@@ -4,6 +4,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
+    padding-bottom: 2rem;
 }
 
 .time-control {
@@ -12,9 +13,51 @@
     
     input {
         width: 100%;
-        padding: 1rem 0;
+        -webkit-appearance: none;
+        background-color: transparent;
+        appearance: none;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 16px;
+            width: 16px;
+           
+        }
+        &::-moz-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 16px;
+            width: 16px;
+           
+        }
     }
 
+    .track {
+        background-color: lightblue;
+        width: 100%;
+        height: 1rem;
+        position: relative;
+        border-radius: 1rem;
+        overflow: hidden;
+        margin: 1rem 0;
+
+        .animate-track {
+            background-color:rgb(207, 207, 207);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateX(0%);
+            pointer-events: none;
+
+        }
+    }
     p {
         padding: 1rem;
     }
@@ -29,5 +72,16 @@
 
     svg {
         cursor: pointer;
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .time-control {
+        width: 90%;
+    }
+
+    .play-control {
+        width: 60%;
     }
 }

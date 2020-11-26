@@ -17,16 +17,32 @@ export default function App() {
     const currentTime = e.target.currentTime;
     const duration = e.target.duration;
 
-    setSongInfo({ ...songInfo, currentTime, duration });
+    const roundedCurrent = Math.round(currentTime);
+    const roundedDuration = Math.round(duration);
+    const animationPercentage = Math.round(
+      (roundedCurrent / roundedDuration) * 100
+    );
+
+    setSongInfo({ ...songInfo, currentTime, duration, animationPercentage });
   };
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
     duration: 0,
+    animationPercentage: 0,
   });
   const [libraryStatus, setLibraryStatus] = useState(false);
+  const trackAnim = {
+    transform: `translateX(${songInfo.animationPercentage}%)`,
+  };
+
+  const songEndHandler = async () => {
+    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
+    if (isPlaying) audioRef.current.play();
+  };
 
   return (
-    <div className="App">
+    <div className={`App ${libraryStatus && "library-active"}`}>
       <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
       <Song currentSong={currentSong} />
       <Player
@@ -38,6 +54,8 @@ export default function App() {
         songInfo={songInfo}
         songs={songs}
         setCurrentSong={setCurrentSong}
+        setSongs={setSongs}
+        trackAnim={trackAnim}
       />
       <Library
         currentSong={currentSong}
@@ -51,6 +69,7 @@ export default function App() {
       <audio
         onTimeUpdate={timeUpdateHandler}
         onLoadedMetadata={timeUpdateHandler}
+        onEnded={songEndHandler}
         ref={audioRef}
         src={currentSong.audio}
       ></audio>
